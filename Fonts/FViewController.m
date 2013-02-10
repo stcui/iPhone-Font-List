@@ -29,10 +29,13 @@
 {
     [super viewDidLoad];
     _families = [[[UIFont familyNames] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
-    NSMutableArray *fonts = [[NSMutableArray alloc] initWithCapacity:_families.count];
-    for (NSString *familyName in _families) {
-        [fontNames addObject:[UIFont fontNamesForFamilyName:familyName]];
-    }
+    
+    NSMutableArray *fontNames = [[NSMutableArray alloc] initWithCapacity:_families.count];
+    
+    for (NSString *familyName in _families)
+        [fontNames addObjectsFromArray:[UIFont fontNamesForFamilyName:familyName]];
+        //[fontNames addObject:[UIFont fontNamesForFamilyName:familyName]];
+    
     _fonts = fontNames;
     
 }
