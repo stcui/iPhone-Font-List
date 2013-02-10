@@ -13,58 +13,22 @@
     NSArray *_families;
     NSArray *_fonts;
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
 
-}
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _families = [[[UIFont familyNames] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
     
     NSMutableArray *fontNames = [[NSMutableArray alloc] initWithCapacity:_families.count];
     
     for (NSString *familyName in _families)
         [fontNames addObjectsFromArray:[UIFont fontNamesForFamilyName:familyName]];
-        //[fontNames addObject:[UIFont fontNamesForFamilyName:familyName]];
     
     _fonts = fontNames;
     
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -77,12 +41,17 @@
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
     return [_fonts count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString * const identifier = @"a";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -100,9 +69,11 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIFont *font = [UIFont fontWithName:[_fonts objectAtIndex:indexPath.row] size:17];
     return font.lineHeight * 3;
 }
+
 @end
