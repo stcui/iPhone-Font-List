@@ -58,7 +58,7 @@
     if (nil == cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier]
                 autorelease];
-        cell.textLabel.text = @"中文 012345 abcdef ABCDEF";
+        cell.textLabel.text = @"!#@$% 012345 abcdef ABCDEF";
     }
     UIFont *font = [UIFont fontWithName:[_fonts objectAtIndex:indexPath.row] size:17];
 
